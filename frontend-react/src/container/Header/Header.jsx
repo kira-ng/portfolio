@@ -16,7 +16,7 @@ const scaleVariants = {
   },
 }
 
-const Header = () => {
+const Header = ({ infos }) => {
   return (
     <div className="app__header app__flex">
       <motion.div
@@ -29,13 +29,17 @@ const Header = () => {
             <span>👋</span>
             <div style={{ marginLeft: 20 }}>
               <p className="p-text">Hello, I am</p>
-              <h1 className="head-text">Kira.</h1>
+              <h1 className="head-text">{infos.name}</h1>
             </div>
           </div>
 
           <div className="tag-cmp app__flex">
-            <p className="p-text">Fullstack Developer</p>
-            <p className="p-text">Blockchain Developer</p>
+            {infos?.description &&
+              infos.description.map((item, index) => (
+                <p key={item + index} className="p-text">
+                  {item}
+                </p>
+              ))}
           </div>
         </div>
       </motion.div>

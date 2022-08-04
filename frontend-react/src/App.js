@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './App.scss'
+import { client } from './client'
 
 // containers
 import { About, Footer, Header, Skills, Testimonial, Work } from './container'
@@ -8,15 +9,25 @@ import { About, Footer, Header, Skills, Testimonial, Work } from './container'
 import { Navbar } from './components'
 
 const App = () => {
+  const [infos, setInfos] = useState([])
+
+  useEffect(() => {
+    const query = '*[_type == "infos"] | order(_createdAt desc)[0]'
+
+    client.fetch(query).then((data) => {
+      setInfos(data)
+    })
+  }, [])
+
   return (
     <div className="app">
       <Navbar />
-      <Header />
-      <About />
-      <Work />
-      <Skills />
+      <Header infos={infos} />
+      <About infos={infos} />
+      <Work infos={infos} />
+      <Skills infos={infos} />
       {/* <Testimonial /> */}
-      <Footer />
+      <Footer infos={infos} />
     </div>
   )
 }
