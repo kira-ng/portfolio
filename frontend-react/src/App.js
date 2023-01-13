@@ -26,7 +26,7 @@ const App = () => {
       <About infos={infos} />
       <Work infos={infos} />
       <Skills infos={infos} />
-      {/* <Testimonial /> */}
+      <Testimonial infos={infos} />
       <Footer infos={infos} />
     </div>
   )
